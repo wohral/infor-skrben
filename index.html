@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Infor – co je nového v obci</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;800&display=swap">
+<style>
+/* Layout: rozcestník se dvěma dlaždicemi → prohlížeč článků (výběr vlevo, list papíru vpravo) */
+:root {
+  --bg: #f3f3ee; --surface: #ffffff; --fg: #1e201b; --muted: #5e6258; --rule: #d9dbd2;
+  --green: #2f6b3a; --green-soft: #e3ece0; --gold: #8a6812; --gold-soft: #f4ecd9; --on-accent: #ffffff;
+  --accent: var(--green); --accent-soft: var(--green-soft);
+  --font: "Figtree", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #151613; --surface: #1f201c; --fg: #e9eae4; --muted: #a5a89d; --rule: #35372f;
+  --green: #86c491; --green-soft: #213020; --gold: #dcb85e; --gold-soft: #2f2816; --on-accent: #12130f; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #151613; --surface: #1f201c; --fg: #e9eae4; --muted: #a5a89d; --rule: #35372f;
+  --green: #86c491; --green-soft: #213020; --gold: #dcb85e; --gold-soft: #2f2816; --on-accent: #12130f; color-scheme: dark }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font); font-size: 16px; line-height: 1.5; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-inline: 16px; padding-block: 28px 64px; }
+[data-motiv="zlata"] { --accent: var(--gold); --accent-soft: var(--gold-soft); }
+[data-motiv="zelena"] { --accent: var(--green); --accent-soft: var(--green-soft); }
+.kicker { color: var(--accent); font-weight: 800; letter-spacing: .14em; text-transform: uppercase; font-size: 12px; }
+h1 { font-size: clamp(28px, 4.4vw, 42px); font-weight: 800; line-height: 1.08; margin: 6px 0 10px; text-wrap: balance; }
+.lead { color: var(--muted); max-width: 62ch; margin: 0; font-size: 17px; }
+.draft { display: inline-block; margin-top: 14px; font-size: 13px; font-weight: 600; color: var(--muted);
+  border: 1px solid var(--rule); padding: 3px 10px; border-radius: 999px; }
+
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 32px; }
+.tile { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px; align-items: end; text-decoration: none; color: var(--fg);
+  background: var(--surface); border: 1px solid var(--rule); border-top: 6px solid var(--accent); border-radius: 10px; padding: 22px;
+  transition: transform .15s ease, box-shadow .15s ease; }
+.tile:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,.10); }
+.tile:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.tile h2 { margin: 4px 0 6px; font-size: 26px; font-weight: 800; color: var(--accent); }
+.tile p { margin: 0; color: var(--muted); font-size: 15px; }
+.tile .count { margin-top: 14px; font-weight: 700; font-size: 14px; }
+.tile .count span { color: var(--accent); }
+.tile img { width: 96px; height: auto; display: block; box-shadow: 0 4px 14px rgba(0,0,0,.16); background: #fff; }
+@media (max-width: 420px) { .tile { grid-template-columns: minmax(0, 1fr); } .tile img { display: none; } }
+
+.back { all: unset; cursor: pointer; color: var(--muted); font-weight: 600; font-size: 14px; display: inline-flex; gap: 6px; }
+.back:hover { color: var(--fg); }
+.back:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.viewer { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 28px; margin-top: 26px; align-items: start; }
+@media (max-width: 760px) { .viewer { grid-template-columns: minmax(0, 1fr); } }
+.list { display: flex; flex-direction: column; gap: 6px; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); }
+@media (max-width: 760px) { .list { position: static; flex-direction: row; overflow-x: auto; padding-bottom: 4px; } }
+.session { all: unset; cursor: pointer; display: grid; gap: 2px; padding: 10px 12px; border-radius: 8px; border: 1px solid transparent; min-width: 0; }
+@media (max-width: 760px) { .session { flex: 0 0 auto; min-width: 150px; border-color: var(--rule); } }
+.session:hover { background: var(--surface); }
+.session:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.session[aria-selected="true"] { background: var(--surface); border-color: var(--rule); box-shadow: inset 3px 0 0 var(--accent); }
+.session .n { font-weight: 800; color: var(--accent); }
+.session .n small { color: var(--muted); font-weight: 500; margin-left: 6px; font-size: 13px; font-variant-numeric: tabular-nums; }
+.session .t { font-size: 14px; }
+.stage { min-width: 0; }
+.bar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.bar h2 { margin: 0; font-size: 20px; font-weight: 800; text-wrap: balance; min-width: 0; }
+.toggle { display: inline-flex; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; background: var(--surface); }
+.toggle button { all: unset; cursor: pointer; padding: 7px 14px; font-weight: 600; font-size: 14px; color: var(--muted); }
+.toggle button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
+.toggle button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.paper-wrap { background: var(--accent-soft); border-radius: 10px; padding: clamp(14px, 3vw, 32px); display: flex; justify-content: center; }
+.paper { display: block; width: 100%; height: auto; background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,.14); }
+.paper.a5 { max-width: 560px; } .paper.a6 { max-width: 400px; }
+.meta { margin-top: 10px; font-size: 14px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 16px; }
+.meta a { color: var(--accent); font-weight: 600; }
+h2.sec { margin: 52px 0 6px; font-size: 22px; font-weight: 800; }
+.sub { color: var(--muted); margin: 0 0 14px; font-size: 15px; }
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.step { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 16px 18px; }
+.step h3 { margin: 0 0 6px; font-size: 16px; font-weight: 800; }
+.step p { margin: 0; color: var(--muted); font-size: 15px; }
+.docs { list-style: none; padding: 0; margin: 0; columns: 2 340px; column-gap: 32px; }
+.docs li { break-inside: avoid; display: flex; gap: 12px; padding: 6px 0; border-bottom: 1px solid var(--rule); font-size: 14px; }
+.docs .d { color: var(--muted); font-variant-numeric: tabular-nums; flex: 0 0 auto; }
+.docs a { color: var(--fg); min-width: 0; }
+@media (prefers-reduced-motion: reduce) { .tile { transition: none; } .tile:hover { transform: none; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <section id="home">
+    <div class="kicker" data-motiv="zelena">Měsíčník Infor · obec Skrbeň</div>
+    <h1>Co je nového v obci</h1>
+    <p class="lead">Návrh dvou nových rubrik do Inforu. Krátké, čtivé články z dokumentů, které obec zveřejňuje na úřední desce, vždy s QR kódem na originály.</p>
+    <span class="draft">Pracovní náhled</span>
+    <div class="tiles" id="tiles"></div>
+
+    <h2 class="sec">Jak články vznikají</h2>
+    <p class="sub">Celé to obstará jeden příkaz v Claude Code. Redakce text jen zkontroluje a pošle do tisku.</p>
+    <div class="steps">
+      <div class="step"><h3>Úřední deska</h3><p>Stáhnou se dokumenty vyvěšené od posledního vydání: usnesení, zápisy, vyhlášky, uzavírky, rozpočtová opatření.</p></div>
+      <div class="step"><h3>Krátké body</h3><p>Z úředního textu vzniknou srozumitelné body. Bez zkratek a bez jmen soukromých osob.</p></div>
+      <div class="step"><h3>A5 i A6</h3><p>Hotová tisková strana ve dvou velikostech, s termínem dalšího zasedání a QR kódem na úřední desku.</p></div>
+    </div>
+  </section>
+
+  <section id="detail" hidden>
+    <button class="back" type="button" id="back">← Zpět na rozcestník</button>
+    <div class="kicker" id="d-kicker" style="margin-top:18px"></div>
+    <h1 id="d-title"></h1>
+    <p class="lead" id="d-lead"></p>
+    <div class="viewer">
+      <nav class="list" role="tablist" aria-label="Články" id="list"></nav>
+      <div class="stage">
+        <div class="bar">
+          <h2 id="title"></h2>
+          <div class="toggle" role="group" aria-label="Formát">
+            <button type="button" id="fmt-a5" aria-pressed="true">A5 · plný text</button>
+            <button type="button" id="fmt-a6" aria-pressed="false">A6 · výběr</button>
+          </div>
+        </div>
+        <div class="paper-wrap"><img id="paper" class="paper a5" alt=""></div>
+        <div class="meta"><span id="dims"></span><a id="pdf" target="_blank" rel="noopener">Otevřít PDF k tisku</a></div>
+      </div>
+    </div>
+    <h2 class="sec">Zdrojové dokumenty</h2>
+    <p class="sub" id="d-docs-sub"></p>
+    <ul class="docs" id="docs"></ul>
+  </section>
+</div>
+
+<script>
+var R = [{"nazev": "Ze zastupitelstva", "motiv": "zelena", "popis": "Samostatný článek ke každému zasedání zastupitelstva.", "key": "zastupitelstvo", "clanky": [{"id": "zastupitelstvo-22", "label": "22. zasedání", "datum": "1. 12. 2025", "a5": "Rozpočet, stočné a nové kontejnery na textil", "a6": "Rozpočet a poplatky na rok 2026"}, {"id": "zastupitelstvo-23", "label": "23. zasedání", "datum": "23. 2. 2026", "a5": "Dary spolkům a příspěvek na kroužky", "a6": "Dary spolkům a kroužky"}, {"id": "zastupitelstvo-24", "label": "24. zasedání", "datum": "6. 5. 2026", "a5": "Účty za rok 2025, chodníky na hřbitově a noční klid", "a6": "Účty v pořádku, chodníky na hřbitově"}, {"id": "zastupitelstvo-25", "label": "25. zasedání", "datum": "27. 7. 2026", "a5": "Psí hřiště a účet za šachty v Horce", "a6": "Psí hřiště a šachty v Horce"}, {"id": "zastupitelstvo-26", "label": "26. zasedání", "datum": "16. 9. 2026", "a5": "Nová pravidla pro pejsky a konec volebního období", "a6": "Nová pravidla pro pejsky"}], "docs": [{"d": "05.10.2026", "t": "Rozpočtové opatření č. 9/2026", "u": "https://www.skrben.cz/dbimg/ro-c-9---schvalene-zo.pdf"}, {"d": "02.10.2026", "t": "26. zasedání /2026/ - zápis", "u": "https://www.skrben.cz/dbimg/zapis-z-26-zasedani2.pdf"}, {"d": "02.10.2026", "t": "26. zasedání /2026/ - usnesení", "u": "https://www.skrben.cz/dbimg/usneseni-z-26-zasedani2.pdf"}, {"d": "17.09.2026", "t": "OZV 2/2026 o volném pohybu psů", "u": "https://www.skrben.cz/dbimg/ozv-stanoveni-pravidel-pro-pohyb-psu.pdf"}, {"d": "08.09.2026", "t": "Zveřejnění termínu 26. zasedání ZO 16. 9. 2026", "u": "https://www.skrben.cz/dbimg/zverejneni-terminu-zasedani4.pdf"}, {"d": "20.08.2026", "t": "Rozpočtové opatření č. 8/2026", "u": "https://www.skrben.cz/dbimg/ro-8.pdf"}, {"d": "19.08.2026", "t": "Rozpočtové opatření č. 7/2026", "u": "https://www.skrben.cz/dbimg/ro-7.pdf"}, {"d": "13.08.2026", "t": "25. zasedání /2026/ – zápis", "u": "https://www.skrben.cz/dbimg/zapis-z-25-zasedani-final.pdf"}, {"d": "13.08.2026", "t": "25. zasedání /2026/ – usnesení", "u": "https://www.skrben.cz/dbimg/usneseni-z-25-zasedani2.pdf"}, {"d": "15.07.2026", "t": "25. zasedání Zastupitelstva 27. 7. 2026", "u": "https://www.skrben.cz/dbimg/zverejneni-terminu-zasedani3.pdf"}, {"d": "14.07.2026", "t": "Rozpočtové opatření 6/2026", "u": "https://www.skrben.cz/dbimg/ro-6.pdf"}, {"d": "18.06.2026", "t": "Rozpočtové opatření č. 5/2026", "u": "https://www.skrben.cz/dbimg/ro-c-5.pdf"}, {"d": "22.05.2026", "t": "24. zasedání /2026/ – zápis", "u": "https://www.skrben.cz/dbimg/zapis-z-24-zasedani-final.pdf"}, {"d": "22.05.2026", "t": "24. zasedání /2026/ – usnesení", "u": "https://www.skrben.cz/dbimg/usneseni-z-24-zasedani2.pdf"}, {"d": "13.05.2026", "t": "Zveřejnění závěrečného účtu obce za rok 2025", "u": "https://www.skrben.cz/dbimg/zaverecny-ucet-2025.pdf"}, {"d": "12.05.2026", "t": "Oznámení o vyhlášení právního předpisu – OZV 1/2026", "u": "https://www.skrben.cz/dbimg/zverejneni_ozv_1-26.pdf"}, {"d": "11.05.2026", "t": "Rozpočtové opatření č. 4/2026", "u": "https://www.skrben.cz/dbimg/ro-4-2026.pdf"}, {"d": "11.05.2026", "t": "OZV obce Skrbeň č. 1/2026, o nočním klidu", "u": "https://www.skrben.cz/dbimg/ozv-skrben---nocni-klid---2026.pdf"}, {"d": "24.04.2026", "t": "24. zasedání Zastupitelstva 6. 5. 2026", "u": "https://www.skrben.cz/dbimg/zverejneni-terminu-zasedani2.pdf"}, {"d": "22.04.2026", "t": "Rozpočtové opatření 3/2026", "u": "https://www.skrben.cz/dbimg/ro-c-3.pdf"}, {"d": "20.03.2026", "t": "Rozpočtové opatření 2/2026", "u": "https://www.skrben.cz/dbimg/ro-c-2.pdf"}, {"d": "04.03.2026", "t": "23. zasedání /2026/ - zápis", "u": "https://www.skrben.cz/dbimg/zapis-k-23-zasedani.pdf"}, {"d": "04.03.2026", "t": "23. zasedání /2026/ - usnesení", "u": "https://www.skrben.cz/dbimg/usneseni-z-23-zasedani2.pdf"}, {"d": "13.02.2026", "t": "23. zasedání Zastupitelstva 23. 2. 2026", "u": "https://www.skrben.cz/dbimg/zverejneni-terminu-zasedani1.pdf"}, {"d": "04.02.2026", "t": "Rozpočtové opatření 1/2026", "u": "https://www.skrben.cz/dbimg/ro-c-1.pdf"}, {"d": "15.12.2025", "t": "22. zasedání /2025/ - zápis", "u": "https://www.skrben.cz/dbimg/zapis-k-22-zasedani.pdf"}, {"d": "15.12.2025", "t": "22. zasedání /2025/ - usnesení", "u": "https://www.skrben.cz/dbimg/usneseni-z-22-zasedani2.pdf"}, {"d": "02.12.2025", "t": "Střednědobý výhled rozpočtu obce 2026 – 2029", "u": "https://www.skrben.cz/dbimg/strednedoby-vyhled-rozpoctu-2026---2029-schvaleny.pdf"}, {"d": "02.12.2025", "t": "Sociální fond – schválený rozpočet 2026", "u": "https://www.skrben.cz/dbimg/socialni-fond-schvaleny-rozpocet-2026.pdf"}, {"d": "02.12.2025", "t": "Rozpočet obce pro rok 2026", "u": "https://www.skrben.cz/dbimg/rozpocet-2026---uredni-deska.pdf"}, {"d": "02.12.2025", "t": "OZV obce Skrbeň, o místním poplatku za obecní systém odpadového hospodářství", "u": "https://www.skrben.cz/dbimg/ozv-2-2025.pdf"}, {"d": "02.12.2025", "t": "Oznámení o vyhlášení právního předpisu - OZV obce Skrbeň č. 2/2025, o místním poplatku za obecní systém odpadového hospodářství", "u": "https://www.skrben.cz/dbimg/zverejneni(20wjth).pdf"}, {"d": "02.12.2025", "t": "Fond kanalizace – schválený rozpočet 2026", "u": "https://www.skrben.cz/dbimg/fond-kanalizace-schvaleny-rozpocet-2026.pdf"}, {"d": "11.11.2025", "t": "Návrh střednědobého výhledu rozpočtu 2026 – 2029", "u": "https://www.skrben.cz/dbimg/strednedoby-vyhled-rozpoctu-2026---2029.pdf"}]}, {"nazev": "Z úřední desky", "motiv": "zlata", "popis": "Co za poslední měsíc přibylo na úřední desce obce, roztříděné do rubrik.", "key": "deska", "clanky": [{"id": "deska", "label": "Z úřední desky", "datum": "19. 9. – 19. 10. 2026", "a5": "Měsíc na úřední desce: máme nové zastupitelstvo", "a6": "Máme nové zastupitelstvo"}], "docs": [{"d": "12.10.2026", "t": "Zápis o výsledku voleb do zastupitelstva obce", "u": "https://www.skrben.cz/dbimg/priloha_1779226613_0_zapis_o_vysledku_voleb_do_zastupitelstva_obce_skrben.pdf"}, {"d": "05.10.2026", "t": "Rozpočtové opatření č. 9/2026", "u": "https://www.skrben.cz/dbimg/ro-c-9---schvalene-zo.pdf"}, {"d": "02.10.2026", "t": "26. zasedání /2026/ - zápis", "u": "https://www.skrben.cz/dbimg/zapis-z-26-zasedani2.pdf"}, {"d": "02.10.2026", "t": "26. zasedání /2026/ - usnesení", "u": "https://www.skrben.cz/dbimg/usneseni-z-26-zasedani2.pdf"}]}];
+var state = { rub: null, id: null, fmt: "a5" };
+try { var f0 = localStorage.getItem("fmt"); if (f0 === "a5" || f0 === "a6") state.fmt = f0; } catch (e) {}
+function $(id) { return document.getElementById(id); }
+function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+function plural(n) { return n === 1 ? "článek" : (n < 5 ? "články" : "článků"); }
+
+R.forEach(function (r) {
+  var a = el("a", "tile"); a.href = "#" + r.key; a.setAttribute("data-motiv", r.motiv);
+  var txt = el("div");
+  txt.appendChild(el("div", "kicker", "Rubrika"));
+  txt.appendChild(el("h2", null, r.nazev));
+  txt.appendChild(el("p", null, r.popis));
+  var c = el("div", "count"); var s = el("span", null, r.clanky.length + " " + plural(r.clanky.length));
+  c.appendChild(s); c.appendChild(document.createTextNode(" · " + r.clanky[r.clanky.length - 1].datum));
+  txt.appendChild(c);
+  var img = el("img"); img.src = "img/" + r.clanky[r.clanky.length - 1].id + "-a6.png"; img.alt = "";
+  a.appendChild(txt); a.appendChild(img);
+  $("tiles").appendChild(a);
+});
+
+function route() {
+  var h = (location.hash || "").replace("#", "");
+  var rub = R.filter(function (r) { return h === r.key || h.indexOf(r.key + "-") === 0; })[0];
+  if (!rub) { $("home").hidden = false; $("detail").hidden = true; state.rub = null; return; }
+  var art = rub.clanky.filter(function (c) { return c.id === h; })[0];
+  if (state.rub !== rub.key) { state.rub = rub.key; buildDetail(rub); }
+  state.id = art ? art.id : rub.clanky[rub.clanky.length - 1].id;
+  $("home").hidden = true; $("detail").hidden = false;
+  render();
+}
+function buildDetail(r) {
+  $("detail").setAttribute("data-motiv", r.motiv);
+  $("d-kicker").textContent = "Rubrika";
+  $("d-title").textContent = r.nazev;
+  $("d-lead").textContent = r.popis + (r.clanky.length > 1 ? " Vyberte článek vlevo a přepněte mezi A5 a A6." : " Přepněte mezi A5 a A6.");
+  var list = $("list"); list.innerHTML = "";
+  list.hidden = r.clanky.length < 2;
+  $("detail").querySelector(".viewer").style.gridTemplateColumns = r.clanky.length < 2 ? "minmax(0, 1fr)" : "";
+  r.clanky.forEach(function (c) {
+    var b = el("button", "session"); b.type = "button"; b.setAttribute("role", "tab"); b.id = "s-" + c.id;
+    var n = el("span", "n", c.label); n.appendChild(el("small", null, c.datum));
+    b.appendChild(n); b.appendChild(el("span", "t", c.a5));
+    b.addEventListener("click", function () { history.replaceState(null, "", "#" + c.id); state.id = c.id; render(); });
+    list.appendChild(b);
+  });
+  var docs = $("docs"); docs.innerHTML = "";
+  r.docs.forEach(function (d) {
+    var li = el("li"); li.appendChild(el("span", "d", d.d));
+    var a = el("a", null, d.t); a.href = d.u; a.target = "_blank"; a.rel = "noopener";
+    li.appendChild(a); docs.appendChild(li);
+  });
+  $("d-docs-sub").textContent = r.docs.length + " dokumentů z úřední desky obce, ze kterých články vycházejí.";
+}
+function render() {
+  var r = R.filter(function (x) { return x.key === state.rub; })[0];
+  var c = r.clanky.filter(function (x) { return x.id === state.id; })[0];
+  r.clanky.forEach(function (x) { $("s-" + x.id).setAttribute("aria-selected", String(x.id === c.id)); });
+  ["a5", "a6"].forEach(function (f) { $("fmt-" + f).setAttribute("aria-pressed", String(f === state.fmt)); });
+  $("title").textContent = c[state.fmt];
+  var img = $("paper");
+  img.src = "img/" + c.id + "-" + state.fmt + ".png";
+  img.alt = c.label + " – " + c[state.fmt] + " (" + state.fmt.toUpperCase() + ")";
+  img.className = "paper " + state.fmt;
+  $("dims").textContent = c.label + " · " + c.datum + " · " + (state.fmt === "a5" ? "148 × 210 mm" : "105 × 148 mm");
+  $("pdf").href = "pdf/" + c.id + "-" + state.fmt + ".pdf";
+}
+["a5", "a6"].forEach(function (f) {
+  $("fmt-" + f).addEventListener("click", function () { state.fmt = f; try { localStorage.setItem("fmt", f); } catch (e) {} render(); });
+});
+$("back").addEventListener("click", function () { location.hash = ""; });
+window.addEventListener("hashchange", route);
+route();
+</script>
+
+</body>
+</html>
