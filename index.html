@@ -120,7 +120,7 @@ h2.sec { margin: 52px 0 6px; font-size: 22px; font-weight: 800; }
           </div>
         </div>
         <div class="paper-wrap"><img id="paper" class="paper a5" alt=""></div>
-        <div class="meta"><span id="dims"></span><a id="pdf" target="_blank" rel="noopener">Otevřít PDF k tisku</a></div>
+        <div class="meta"><span id="dims"></span><a id="pdf" target="_blank" rel="noopener">PDF k tisku</a><a id="md" target="_blank" rel="noopener">Markdown</a><a id="txt" target="_blank" rel="noopener">Text (TXT)</a></div>
       </div>
     </div>
     <h2 class="sec">Zdrojové dokumenty</h2>
@@ -196,6 +196,8 @@ function render() {
   img.className = "paper " + state.fmt;
   $("dims").textContent = c.label + " · " + c.datum + " · " + (state.fmt === "a5" ? "148 × 210 mm" : "105 × 148 mm");
   $("pdf").href = "pdf/" + c.id + "-" + state.fmt + ".pdf";
+  $("md").href = "text/" + c.id + "-" + state.fmt + ".md";
+  $("txt").href = "text/" + c.id + "-" + state.fmt + ".txt";
 }
 ["a5", "a6"].forEach(function (f) {
   $("fmt-" + f).addEventListener("click", function () { state.fmt = f; try { localStorage.setItem("fmt", f); } catch (e) {} render(); });
