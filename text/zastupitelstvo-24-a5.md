@@ -4,13 +4,13 @@
 
 Nejdelší zasedání roku – trvalo přes dvě hodiny a probralo se na něm všechno od popelnic po fotovoltaiku na školce.
 
-- **Hospodaření obce za rok 2025 prošlo bez výhrad.** Audit našel jen formální chybu: obec několik let neposílala peníze do fondu kanalizace (je jich tam dost). Nově tam půjde nejméně 100 000 Kč ročně.
-- **Na hřbitově přibudou dva chodníky** k novým řadám hrobů. Postaví je nejlevnější uchazeč za zhruba 303 tisíc Kč bez DPH.
-- **Výměna popelnic kvůli čipování:** kdo loni nahlásil starou plechovou nebo nevhodnou plastovou popelnici, dostane 120l zdarma, nebo 240l za 250 Kč.
-- **Noční klid** začne při šesti letních akcích (tři na statku, tři na farské zahradě) až ve 2:00.
-- **Fotovoltaika na školce:** baterie nebudou ve vlhkém sklepě, ale na konzolích nad schodištěm. Vícepráce vyjdou na 124 tisíc Kč bez DPH.
-- **Dary:** Floriánek 25 000 Kč, komunitní centrum 30 000 Kč, Jdeme autistům naproti 25 000 Kč, Zet-My 6 000 Kč.
-- **Z diskuse:** občané upozornili na nedodělky po stavbě v ulici Jos. Fialy – starosta slíbil nápravu. S novým zázemím na hřišti přijde i nový provozní řád a ceník.
+- **Hospodaření obce za rok 2025 prošlo bez výhrad.** Audit našel jen formální chybu: obec několik let neposílala peníze do fondu kanalizace, protože jich je tam dost. Pokuta z toho není a nově tam půjde nejméně 100 000 Kč ročně.
+- **Na hřbitově přibudou dva chodníky** k novým řadám hrobů – u první řady už je šest hrobů, ke kterým chodník zatím nevede. Postaví je nejlevnější ze tří uchazečů za zhruba 303 tisíc Kč bez DPH, nejspíš letos v létě.
+- **Výměna popelnic kvůli čipování:** kdo loni nahlásil starou plechovou nebo nevhodnou plastovou popelnici, dostane 120l zdarma, nebo 240l za 250 Kč. První várka nových popelnic už je na úřadě.
+- **Noční klid** začne při šesti letních akcích (tři na statku, tři na farské zahradě) až ve 2:00. Ostatní noci platí běžná pravidla.
+- **Fotovoltaika na školce:** baterie nebudou ve vlhkém sklepě, ale na konzolích nad schodištěm, takže provoz školky neomezí. Vícepráce včetně protipožárních dveří vyjdou na 124 tisíc Kč bez DPH.
+- **Dary:** Floriánek 25 000 Kč, komunitní centrum 30 000 Kč, Jdeme autistům naproti 25 000 Kč a Zet-My 6 000 Kč. Obě sociální služby pomáhají přímo lidem ze Skrbeně.
+- **Z diskuse:** občané upozornili na nedodělky po stavbě v ulici Jos. Fialy – starosta slíbil nápravu se stavební firmou. Řešilo se i obsazování fotbalového hřiště cizími trenéry; s novým zázemím přijde nový provozní řád a ceník.
 
 **Příští zasedání:** Pondělí 27. 7. 2026 v 18:30, Dům služeb.
 

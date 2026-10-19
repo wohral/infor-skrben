@@ -4,12 +4,12 @@
 
 Letní zasedání potěšilo pejskaře – a přineslo jeden velký účet za kanalizaci.
 
-- **Máme psí hřiště!** Čtyři agility prvky (kladina, zeď, tunel, přeskakovadlo) převážně z akátového dřeva, aby ladily s lesoparkem, a k tomu plot s brankou.
-- **Šachty v Horce zaplatíme z 85 %.** Při opravě ulice v Horce se ukázalo, že všech 15 betonových šachet je zničených. Posudek z VUT v Brně potvrdil, že je rozežraly splašky ze Skrbeně. Obec zaplatí asi 2,96 mil. Kč z fondu kanalizace.
-- **Zázemí na hřišti se protáhne do 20. 10.** Kvůli zimě, opožděným oknům a doplněným pracím (osvětlení, optika, betonové stupně) stoupla cena o 894 tisíc Kč bez DPH.
-- **Pod pergolu přijde 10 stolů s lavicemi** od místního stolaře. Starou „boudu“ s eternitem je nutné kvůli kolaudaci zbourat.
-- **Dálniční most u Křepelky obec nepřevezme.** Státní pozemkový úřad tlačí na převod, budoucí opravy by ale byly pro obecní rozpočet neúnosné.
-- **Myslivci mohou dál užívat obecní políčko** na pěstování krmiva.
+- **Máme psí hřiště!** Čtyři agility prvky – kladina, zeď, tunel a přeskakovadlo – jsou převážně z akátového dřeva, aby ladily s lesoparkem. Nejlevnější nabídka byla z plastu a oceli, proto zastupitelé zvolili o něco dražší dřevěnou. K tomu přibude plot se zeleným pletivem a brankou.
+- **Šachty v Horce zaplatíme z 85 %.** Při opravě ulice v Horce se ukázalo, že všech 15 betonových kanalizačních šachet je zničených. Posudek z VUT v Brně potvrdil, že je rozežraly splašky ze Skrbeně – v uzavřené tlakové kanalizaci zahnívají a vzniká agresivní koroze. Obec zaplatí asi 2,96 mil. Kč z fondu kanalizace, kde je přes 5 mil. Kč.
+- **Zázemí na hřišti se protáhne do 20. 10.** Zdržela ho zima, opožděná okna i práce navíc (osvětlení, optický kabel, betonové stupně). Cena stoupla o 894 tisíc Kč bez DPH, zkolaudovat se ale dá dřív.
+- **Pod pergolu přijde 10 stolů s lavicemi** od místního stolaře, který podal nejvýhodnější nabídku. Starou „boudu“ s eternitem je kvůli požární bezpečnosti nutné zbourat – zastupitelé zvolili dražší firmu, protože může začít hned.
+- **Dálniční most u Křepelky obec nepřevezme.** Státní pozemkový úřad na převod tlačí a hrozí uzavřením mostu, budoucí opravy by ale byly pro obecní rozpočet neúnosné. Pro převod nehlasoval nikdo.
+- **Myslivci mohou dál užívat obecní políčko** na pěstování krmiva. Obec také koupila 133 m² pole u nové cyklostezky, aby se vyřešil přístup na sousední pozemek.
 
 **Příští zasedání:** Středa 16. 9. 2026 v 18:30, Dům služeb.
 
